@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { FormContext } from '../store';
+import withStep from '../hoc/withStep';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
 import { STEP1 } from '../actions/steps';
@@ -57,4 +58,4 @@ function StepOne() {
   );
 }
 
-export default StepOne;
+export default withStep(StepOne);

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { FormContext } from '../store';
+import withStep from '../hoc/withStep';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
 import { STEP2 } from '../actions/steps';
@@ -9,10 +10,6 @@ function StepTwo() {
   const [phone, setPhone] = useState('');
   const context = useContext(FormContext);
   const { currentStep, onChange, onStep } = context;
-
-  if (currentStep !== 2) {
-    return null;
-  }
 
   const handleNameChange = e => {
     let { name, value } = e.target;
@@ -71,4 +68,4 @@ function StepTwo() {
   );
 }
 
-export default StepTwo;
+export default withStep(StepTwo);
