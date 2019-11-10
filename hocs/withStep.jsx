@@ -15,7 +15,7 @@ function getChangeData(e, step = 'STEP_1') {
 function withStep(Component) {
   return ({ ...props }) => {
     const context = useContext(FormContext);
-    const { currentStep, handleChange, handleStep } = context;
+    const { currentStep, onChange, onStep } = context;
     const { step } = props;
 
     if (currentStep !== step) {
@@ -24,17 +24,17 @@ function withStep(Component) {
 
     const handleNameChange = (e, step, callback) => {
       const data = getChangeData(e, step);
-      handleChange(data);
+      onChange(data);
       callback(data);
     };
 
     const handleOnClean = callback => {
-      handleChange({});
+      onChange({});
       callback();
     };
 
     const handleStepClick = () => {
-      handleStep(currentStep + 1);
+      onStep(currentStep + 1);
     };
 
     return (
