@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { FormContext } from '../contexts/FormContext';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
 import { Validations } from '@catho/quantum/Form';
 
-function StepOne(props) {
-  const { currentStep, handleChange, onStep } = props;
+function StepOne() {
   const [name, setName] = useState('');
+  const context = useContext(FormContext);
+  const { currentStep, handleChange, handleStep } = context;
 
   if (currentStep !== 1) {
     return null;
@@ -28,7 +30,7 @@ function StepOne(props) {
   };
 
   const handleStepClick = () => {
-    onStep(currentStep + 1);
+    handleStep(currentStep + 1);
   };
 
   return (

@@ -1,9 +1,9 @@
 import React, { useState, useReducer } from 'react';
-import { Form } from '@catho/quantum/Form';
+import { FormProvider } from '../contexts/FormContext';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 
-function StepsForm(props) {
+function StepsForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const initialState = {
     name: '',
@@ -41,7 +41,7 @@ function StepsForm(props) {
     });
   };
 
-  const handleStep = step => {
+  const onStep = step => {
     setCurrentStep(step);
   };
 
@@ -49,18 +49,12 @@ function StepsForm(props) {
 
   return (
     <>
-      <Form>
-        <StepOne
-          currentStep={currentStep}
-          handleChange={onChange}
-          onStep={handleStep}
-        />
-        <StepTwo
-          currentStep={currentStep}
-          handleChange={onChange}
-          onStep={handleStep}
-        />
-      </Form>
+      <FormProvider
+        value={{ currentStep, handleChange: onChange, handleStep: onStep }}
+      >
+        <StepOne />
+        <StepTwo />
+      </FormProvider>
     </>
   );
 }

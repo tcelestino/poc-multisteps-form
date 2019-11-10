@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { FormContext } from '../contexts/FormContext';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
 
-function StepTwo(props) {
-  const { currentStep, handleChange, onStep } = props;
+function StepTwo() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const context = useContext(FormContext);
+  const { currentStep, handleChange, handleStep } = context;
 
   if (currentStep !== 2) {
     return null;
@@ -33,7 +35,7 @@ function StepTwo(props) {
   };
 
   const handleStepClick = () => {
-    onStep(currentStep + 1);
+    handleStep(currentStep + 1);
   };
 
   return (
