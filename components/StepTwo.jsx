@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { FormContext } from '../contexts/FormContext';
+import { FormContext } from '../store';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
 
@@ -7,7 +7,7 @@ function StepTwo() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const context = useContext(FormContext);
-  const { currentStep, handleChange, handleStep } = context;
+  const { currentStep, onChange, onStep } = context;
 
   if (currentStep !== 2) {
     return null;
@@ -23,7 +23,7 @@ function StepTwo() {
 
     name === 'email' ? setEmail(value) : setPhone(value);
 
-    handleChange(stepData);
+    onChange(stepData);
   };
 
   const isButtonDisable = email && phone !== '';
@@ -31,11 +31,11 @@ function StepTwo() {
   const handleOnClean = e => {
     setEmail('');
     setPhone('');
-    handleChange({});
+    onChange({});
   };
 
   const handleStepClick = () => {
-    handleStep(currentStep + 1);
+    onStep(currentStep + 1);
   };
 
   return (
