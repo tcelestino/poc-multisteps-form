@@ -1,3 +1,3 @@
-import { FormContext, FormProvider } from './FormStore';
+import { FormContext, FormProvider, FormConsumer } from './FormStore';
 
-export { FormContext, FormProvider }
+export { FormContext, FormProvider, FormConsumer }
