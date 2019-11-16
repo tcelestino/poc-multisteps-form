@@ -10,6 +10,8 @@ const initialState = {
 const FormContext = createContext(initialState);
 const FormConsumer = FormContext.Consumer;
 
+FormContext.displayName = 'FormContext';
+
 function FormProvider(props) {
   const { children } = props;
   const [currentStep, setCurrentStep] = useState(1);
