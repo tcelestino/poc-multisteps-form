@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import withStep from '../hoc/withStep';
+import withStep from '../../hoc/withStep';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
-import { STEP2 } from '../actions/steps';
+import { STEP2 } from '../../actions/steps';
 
 function StepTwo(props) {
   const [email, setEmail] = useState('');

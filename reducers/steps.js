@@ -1,4 +1,4 @@
-import { STEP1, STEP2, STEP3 } from '../actions/steps';
+import { STEP1, STEP2, STEP3, STEP4 } from '../actions/steps';
 
 function setMultipleFields(state, action) {
   let { field } = action;
@@ -8,19 +8,21 @@ function setMultipleFields(state, action) {
   }
 }
 
-export default function (state, action) {
+export default function (prevState, action) {
   switch (action.type) {
     case STEP1:
       return {
         [action.field]: action.name
       };
     case STEP2:
-      return setMultipleFields(state, action)
+      return setMultipleFields(prevState, action)
     case STEP3:
-      return setMultipleFields(state, action)
+      return setMultipleFields(prevState, action)
+    case STEP4:
+      return setMultipleFields(prevState, action)
       break;
     default:
-      return state;
+      return prevState;
       break;
   }
 };
