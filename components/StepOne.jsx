@@ -1,44 +1,33 @@
-import React, { useState, useContext } from 'react';
-import { FormContext } from '../store';
+import React, { useState } from 'react';
+import withStep from '../hoc/withStep';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
 import { STEP1 } from '../actions/steps';
 
-function StepOne() {
+function StepOne(props) {
   const [name, setName] = useState('');
-  const context = useContext(FormContext);
-  const { currentStep, onChange, onStep } = context;
 
-  if (currentStep !== 1) {
-    return null;
-  }
+  const {
+    fn: { handleNameChange, handleStepClick, handleOnClean }
+  } = props;
 
-  const handleChange = e => {
-    let { name, value } = e.target;
-    let stepData = {
-      name: name,
-      value: value,
-      step: STEP1
-    };
-    setName(value);
-
-    onChange(stepData);
+  const onChange = e => {
+    handleNameChange(e, STEP1, ({ value }) => {
+      setName(value);
+    });
   };
 
-  const handleClean = e => {
-    setName('');
-    onChange({});
-  };
-
-  const handleStepClick = () => {
-    onStep(currentStep + 1);
+  const onClean = () => {
+    handleOnClean(() => {
+      setName('');
+    });
   };
 
   return (
     <>
       <Input
-        onChange={handleChange}
-        onClean={handleClean}
+        onChange={onChange}
+        onClean={onClean}
         type="text"
         name="name"
         id="name"
@@ -57,4 +46,4 @@ function StepOne() {
   );
 }
 
-export default StepOne;
+export default withStep(StepOne);

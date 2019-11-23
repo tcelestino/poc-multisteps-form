@@ -7,9 +7,9 @@ function StepsForm() {
   return (
     <>
       <FormProvider>
-        <StepOne />
-        <StepTwo />
-        <StepThree />
+        <StepOne step={1} />
+        <StepTwo step={2} />
+        <StepThree step={3} />
       </FormProvider>
     </>
   );

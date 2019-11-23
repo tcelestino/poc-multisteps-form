@@ -1,49 +1,37 @@
-import React, { useState, useContext } from 'react';
-import { FormContext } from '../store';
+import React, { useState } from 'react';
+import withStep from '../hoc/withStep';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
 import { STEP2 } from '../actions/steps';
 
-function StepTwo() {
+function StepTwo(props) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const context = useContext(FormContext);
-  const { currentStep, onChange, onStep } = context;
 
-  if (currentStep !== 2) {
-    return null;
-  }
+  const {
+    fn: { handleNameChange, handleStepClick, handleOnClean }
+  } = props;
 
-  const handleNameChange = e => {
-    let { name, value } = e.target;
-    let stepData = {
-      name: name,
-      value: value,
-      step: STEP2
-    };
-
-    name === 'email' ? setEmail(value) : setPhone(value);
-
-    onChange(stepData);
+  const onChange = e => {
+    handleNameChange(e, STEP2, ({ name, value }) => {
+      name === 'email' ? setEmail(value) : setPhone(value);
+    });
   };
 
   const isButtonDisable = email && phone !== '';
 
-  const handleOnClean = e => {
-    setEmail('');
-    setPhone('');
-    onChange({});
-  };
-
-  const handleStepClick = () => {
-    onStep(currentStep + 1);
+  const onClean = () => {
+    handleOnClean(() => {
+      setEmail('');
+      setPhone('');
+    });
   };
 
   return (
     <>
       <Input
-        onChange={handleNameChange}
-        onClean={handleOnClean}
+        onChange={onChange}
+        onClean={onClean}
         type="email"
         name="email"
         id="email"
@@ -52,8 +40,8 @@ function StepTwo() {
         required
       />
       <Input.Phone
-        onChange={handleNameChange}
-        onClean={handleOnClean}
+        onChange={onChange}
+        onClean={onClean}
         name="tel"
         id="tel"
         label="Phone"
@@ -71,4 +59,4 @@ function StepTwo() {
   );
 }
 
-export default StepTwo;
+export default withStep(StepTwo);
