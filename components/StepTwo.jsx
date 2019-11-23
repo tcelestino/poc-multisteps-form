@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { FormContext } from '../store';
+import React, { useState } from 'react';
 import withStep from '../hoc/withStep';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
@@ -14,7 +13,7 @@ function StepTwo(props) {
   } = props;
 
   const onChange = e => {
-    handleNameChange(e, 'STEP_2', ({ name, value }) => {
+    handleNameChange(e, STEP2, ({ name, value }) => {
       name === 'email' ? setEmail(value) : setPhone(value);
     });
   };

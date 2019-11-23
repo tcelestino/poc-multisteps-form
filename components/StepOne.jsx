@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { FormContext } from '../store';
+import React, { useState } from 'react';
 import withStep from '../hoc/withStep';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
@@ -8,16 +7,12 @@ import { STEP1 } from '../actions/steps';
 function StepOne(props) {
   const [name, setName] = useState('');
 
-  if (currentStep !== 1) {
-    return null;
-  }
-
   const {
     fn: { handleNameChange, handleStepClick, handleOnClean }
   } = props;
 
   const onChange = e => {
-    handleNameChange(e, 'STEP_1', ({ value }) => {
+    handleNameChange(e, STEP1, ({ value }) => {
       setName(value);
     });
   };

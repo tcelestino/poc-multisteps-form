@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { FormContext } from '../store';
+import React, { useState } from 'react';
+import withStep from '../hoc/withStep';
 import RadioGroup from '@catho/quantum/RadioGroup';
 import Button from '@catho/quantum/Button';
 import { STEP3 } from '../actions/steps';
@@ -19,39 +19,24 @@ const options = [
   }
 ];
 
-function StepThree() {
-  const context = useContext(FormContext);
+function StepThree(props) {
   const [checked, setChecked] = useState(false);
-  const { currentStep, onChange, onStep } = context;
+  const {
+    fn: { handleNameChange, handleStepClick, handleOnClean }
+  } = props;
 
-  if (currentStep !== 3) {
-    return null;
-  }
+  const onChange = e => {
+    let source = e;
+    let changed = { name: 'statusJobs' };
 
-  const handleNameChange = e => {
-    let { value } = e;
-    let stepData = {
-      name: 'statusJobs',
-      value: value,
-      step: STEP3
-    };
-
-    setChecked(true);
-
-    onChange(stepData);
-  };
-
-  const handleStepClick = () => {
-    onStep(currentStep + 1);
+    handleNameChange(Object.assign(source, changed), STEP3, () => {
+      setChecked(true);
+    });
   };
 
   return (
     <>
-      <RadioGroup
-        name="statusJobs"
-        options={options}
-        onChange={handleNameChange}
-      />
+      <RadioGroup name="statusJobs" options={options} onChange={onChange} />
       <Button
         onClick={handleStepClick}
         skin="primary"
@@ -63,4 +48,4 @@ function StepThree() {
   );
 }
 
-export default StepThree;
+export default withStep(StepThree);
