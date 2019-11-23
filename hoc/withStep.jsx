@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { FormContext } from '../contexts/FormContext';
+import { FormContext } from '../store';
 
-function getChangeData(e, step = 'STEP_1') {
-  let { name, value } = e.target;
+function getChangeData(e, step) {
+  let { name, value } = e.target || e;
   let stepData = {
     name: name,
     value: value,
