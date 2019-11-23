@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { FormContext } from '../store';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
+import { STEP1 } from '../actions/steps';
 
 function StepOne() {
   const [name, setName] = useState('');
@@ -17,7 +18,7 @@ function StepOne() {
     let stepData = {
       name: name,
       value: value,
-      step: 'STEP_1'
+      step: STEP1
     };
     setName(value);
 

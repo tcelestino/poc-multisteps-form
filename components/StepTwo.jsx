@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { FormContext } from '../store';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
+import { STEP2 } from '../actions/steps';
 
 function StepTwo() {
   const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ function StepTwo() {
     let stepData = {
       name: name,
       value: value,
-      step: 'STEP_2'
+      step: STEP2
     };
 
     name === 'email' ? setEmail(value) : setPhone(value);
