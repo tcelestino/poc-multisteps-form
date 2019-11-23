@@ -1,5 +1,6 @@
 import React, { useState, useReducer, createContext } from 'react';
 import { Form } from '@catho/quantum/Form';
+import Steps from '../reducers/steps';
 
 const initialState = {
   name: '',
@@ -7,7 +8,7 @@ const initialState = {
   tel: ''
 };
 
-const FormContext = createContext(initialState);
+const FormContext = createContext();
 const FormConsumer = FormContext.Consumer;
 
 FormContext.displayName = 'FormContext';
@@ -15,27 +16,7 @@ FormContext.displayName = 'FormContext';
 function FormProvider(props) {
   const { children } = props;
   const [currentStep, setCurrentStep] = useState(1);
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'STEP_1':
-        return {
-          [action.field]: action.name
-        };
-      case 'STEP_2':
-        let { field } = action;
-        return {
-          ...state,
-          [field]: action[field]
-        };
-        break;
-      default:
-        return state;
-        break;
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(Steps, initialState);
 
   const onChange = e => {
     const { name, step, value } = e;
