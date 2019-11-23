@@ -5,7 +5,8 @@ import Steps from '../reducers/steps';
 const initialState = {
   name: '',
   email: '',
-  tel: ''
+  tel: '',
+  statusJobs: '0'
 };
 
 const FormContext = createContext();
