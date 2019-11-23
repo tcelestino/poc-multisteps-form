@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { FormContext } from '../store';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
+import { STEP2 } from '../actions/steps';
 
-function StepTwo(props) {
-  const { currentStep, handleChange, onStep } = props;
+function StepTwo() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const context = useContext(FormContext);
+  const { currentStep, onChange, onStep } = context;
 
   if (currentStep !== 2) {
     return null;
@@ -16,12 +19,12 @@ function StepTwo(props) {
     let stepData = {
       name: name,
       value: value,
-      step: 'STEP_2'
+      step: STEP2
     };
 
     name === 'email' ? setEmail(value) : setPhone(value);
 
-    handleChange(stepData);
+    onChange(stepData);
   };
 
   const isButtonDisable = email && phone !== '';
@@ -29,7 +32,7 @@ function StepTwo(props) {
   const handleOnClean = e => {
     setEmail('');
     setPhone('');
-    handleChange({});
+    onChange({});
   };
 
   const handleStepClick = () => {

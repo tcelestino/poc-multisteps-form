@@ -1,30 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { FormContext } from '../store';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
-import { Validations } from '@catho/quantum/Form';
+import { STEP1 } from '../actions/steps';
 
-function StepOne(props) {
-  const { currentStep, handleChange, onStep } = props;
+function StepOne() {
   const [name, setName] = useState('');
+  const context = useContext(FormContext);
+  const { currentStep, onChange, onStep } = context;
 
   if (currentStep !== 1) {
     return null;
   }
 
-  const handleNameChange = e => {
+  const handleChange = e => {
     let { name, value } = e.target;
     let stepData = {
       name: name,
       value: value,
-      step: 'STEP_1'
+      step: STEP1
     };
     setName(value);
-    handleChange(stepData);
+
+    onChange(stepData);
   };
 
-  const handleOnClean = e => {
+  const handleClean = e => {
     setName('');
-    handleChange({});
+    onChange({});
   };
 
   const handleStepClick = () => {
@@ -34,15 +37,13 @@ function StepOne(props) {
   return (
     <>
       <Input
-        onChange={handleNameChange}
-        onClean={handleOnClean}
+        onChange={handleChange}
+        onClean={handleClean}
         type="text"
         name="name"
         id="name"
         label="Name"
         value={name}
-        validate={Validations.MinLength}
-        minLength={5}
         required
       />
       <Button
