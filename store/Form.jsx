@@ -7,7 +7,8 @@ const initialState = {
   email: '',
   tel: '',
   statusJobs: '0',
-  optin: '1'
+  optin: '1',
+  state: ''
 };
 
 const FormContext = createContext();
