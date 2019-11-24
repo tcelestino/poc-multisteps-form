@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import withStep from '../../hoc/withStep';
 import Input from '@catho/quantum/Input';
 import Button from '@catho/quantum/Button';
+import withStep from '../../hoc/withStep';
 import { STEP2 } from '../../actions/steps';
 
 function StepTwo(props) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import withStep from '../../hoc/withStep';
 import RadioGroup from '@catho/quantum/RadioGroup';
 import Button from '@catho/quantum/Button';
+import withStep from '../../hoc/withStep';
 import { STEP3 } from '../../actions/steps';
 
 const options = [

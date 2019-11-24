@@ -1,13 +1,13 @@
 import { FormProvider } from '../store';
-import { StepOne, StepTwo, StepThree, StepFour } from './Steps';
+import { StepName, StepEmailPhone, StepStatus, StepOptin } from './Steps';
 
 function StepsForm() {
   return (
     <FormProvider>
-      <StepOne step={1} />
-      <StepTwo step={2} />
-      <StepThree step={3} />
-      <StepFour step={4} />
+      <StepName step={1} />
+      <StepEmailPhone step={2} />
+      <StepStatus step={3} />
+      <StepOptin step={4} />
     </FormProvider>
   );
 }

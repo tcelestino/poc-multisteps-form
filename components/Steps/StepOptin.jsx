@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import withStep from '../../hoc/withStep';
 import { CheckboxGroup } from '@catho/quantum/Checkbox';
 import Button from '@catho/quantum/Button';
+import withStep from '../../hoc/withStep';
 import { arrToObj } from '../../utils';
 import { STEP4 } from '../../actions/steps';
 
