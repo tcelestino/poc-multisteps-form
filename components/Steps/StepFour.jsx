@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import withStep from '../../hoc/withStep';
 import { CheckboxGroup } from '@catho/quantum/Checkbox';
 import Button from '@catho/quantum/Button';
+import { arrToObj } from '../../utils';
 import { STEP4 } from '../../actions/steps';
 
 const options = [
@@ -20,12 +21,8 @@ function StepFour(props) {
 
   const [optionsData, setOptionsData] = useState(options);
 
-  const onChange = e => {
-    let source = e.reduce((acc, cur, i) => {
-      acc = cur;
-      return acc;
-    }, {});
-
+  const updateData = e => {
+    let source = arrToObj(e);
     let target = { value: source.checked ? '1' : '0' };
 
     handleNameChange(Object.assign(source, target), STEP4, () => {
@@ -33,10 +30,19 @@ function StepFour(props) {
     });
   };
 
+  const onChange = e => {
+    updateData(e);
+  };
+
+  const onClick = e => {
+    updateData(optionsData);
+    handleStepClick();
+  };
+
   return (
     <>
       <CheckboxGroup options={optionsData} onChange={onChange} />
-      <Button onClick={handleStepClick} skin="primary">
+      <Button onClick={onClick} skin="primary">
         Next step
       </Button>
     </>
