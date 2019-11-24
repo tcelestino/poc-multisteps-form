@@ -14,7 +14,7 @@ const options = [
   }
 ];
 
-function StepFour(props) {
+function StepOptin(props) {
   const {
     fn: { handleNameChange, handleStepClick }
   } = props;
@@ -49,4 +49,4 @@ function StepFour(props) {
   );
 }
 
-export default withStep(StepFour);
+export default withStep(StepOptin);

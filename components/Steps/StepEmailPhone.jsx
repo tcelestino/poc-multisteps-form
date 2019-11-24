@@ -4,7 +4,7 @@ import Button from '@catho/quantum/Button';
 import withStep from '../../hoc/withStep';
 import { STEP2 } from '../../actions/steps';
 
-function StepTwo(props) {
+function StepEmailPhone(props) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
@@ -59,4 +59,4 @@ function StepTwo(props) {
   );
 }
 
-export default withStep(StepTwo);
+export default withStep(StepEmailPhone);

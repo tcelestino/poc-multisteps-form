@@ -19,7 +19,7 @@ const options = [
   }
 ];
 
-function StepThree(props) {
+function StepStatus(props) {
   const [checked, setChecked] = useState(false);
   const {
     fn: { handleNameChange, handleStepClick }
@@ -48,4 +48,4 @@ function StepThree(props) {
   );
 }
 
-export default withStep(StepThree);
+export default withStep(StepStatus);

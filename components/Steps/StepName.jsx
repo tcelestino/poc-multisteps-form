@@ -4,7 +4,7 @@ import Button from '@catho/quantum/Button';
 import withStep from '../../hoc/withStep';
 import { STEP1 } from '../../actions/steps';
 
-function StepOne(props) {
+function StepName(props) {
   const [name, setName] = useState('');
 
   const {
@@ -46,4 +46,4 @@ function StepOne(props) {
   );
 }
 
-export default withStep(StepOne);
+export default withStep(StepName);
