@@ -1,6 +1,6 @@
-import StepOne from './StepOne'
-import StepTwo from './StepTwo'
-import StepThree from './StepThree'
-import StepFour from './StepFour'
+import StepName from './StepName'
+import StepEmailPhone from './StepEmailPhone'
+import StepStatus from './StepStatus'
+import StepOptin from './StepOptin'
 
-export { StepOne, StepTwo, StepThree, StepFour }
+export { StepName, StepEmailPhone, StepStatus, StepOptin }

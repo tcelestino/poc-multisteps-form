@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import withStep from '../../hoc/withStep';
 import { CheckboxGroup } from '@catho/quantum/Checkbox';
 import Button from '@catho/quantum/Button';
+import withStep from '../../hoc/withStep';
 import { arrToObj } from '../../utils';
 import { STEP4 } from '../../actions/steps';
 
@@ -14,7 +14,7 @@ const options = [
   }
 ];
 
-function StepFour(props) {
+function StepOptin(props) {
   const {
     fn: { handleNameChange, handleStepClick }
   } = props;
@@ -49,4 +49,4 @@ function StepFour(props) {
   );
 }
 
-export default withStep(StepFour);
+export default withStep(StepOptin);

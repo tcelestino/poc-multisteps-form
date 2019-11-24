@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import withStep from '../../hoc/withStep';
 import RadioGroup from '@catho/quantum/RadioGroup';
 import Button from '@catho/quantum/Button';
+import withStep from '../../hoc/withStep';
 import { STEP3 } from '../../actions/steps';
 
 const options = [
@@ -19,7 +19,7 @@ const options = [
   }
 ];
 
-function StepThree(props) {
+function StepStatus(props) {
   const [checked, setChecked] = useState(false);
   const {
     fn: { handleNameChange, handleStepClick }
@@ -48,4 +48,4 @@ function StepThree(props) {
   );
 }
 
-export default withStep(StepThree);
+export default withStep(StepStatus);
