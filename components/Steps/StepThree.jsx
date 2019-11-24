@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import withStep from '../hoc/withStep';
+import withStep from '../../hoc/withStep';
 import RadioGroup from '@catho/quantum/RadioGroup';
 import Button from '@catho/quantum/Button';
-import { STEP3 } from '../actions/steps';
+import { STEP3 } from '../../actions/steps';
 
 const options = [
   {
@@ -22,7 +22,7 @@ const options = [
 function StepThree(props) {
   const [checked, setChecked] = useState(false);
   const {
-    fn: { handleNameChange, handleStepClick, handleOnClean }
+    fn: { handleNameChange, handleStepClick }
   } = props;
 
   const onChange = e => {
