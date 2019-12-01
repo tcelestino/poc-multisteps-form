@@ -1,4 +1,7 @@
 import fetch from 'isomorphic-unfetch';
+import getConfig from 'next/config'
+
+const { serverRuntimeConfig } = getConfig()
 
 const hidrateCities = (cities) => {
   return cities.map(({ cidade_id, cidade }) => {
@@ -11,7 +14,7 @@ const hidrateCities = (cities) => {
 
 export default async (req, res) => {
   const { query: { id } } = req;
-  const citiesApi = await fetch(`https://www.catho.com.br/util/localidade/ajaxCidadesByEstadoId/${id}/`);
+  const citiesApi = await fetch(`${serverRuntimeConfig.API_HOST}/${id}/`);
   const cities = await citiesApi.json();
 
   if (cities.length > 1) {

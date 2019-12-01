@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
+import getConfig from 'next/config';
 import { Dropdown } from '@catho/quantum';
 import Button from '@catho/quantum/Button';
 import withStep from '../../hoc/withStep';
 import { STEP5 } from '../../actions/steps';
+
+const { publicRuntimeConfig } = getConfig();
 
 function StepStateCity(props) {
   const {
@@ -17,7 +20,7 @@ function StepStateCity(props) {
 
   useEffect(() => {
     const fetchStates = async () => {
-      const res = await fetch('/api/states');
+      const res = await fetch(`${publicRuntimeConfig.STATES}`);
       const json = await res.json();
       setStates(json);
     };
@@ -26,7 +29,7 @@ function StepStateCity(props) {
   }, [cities]);
 
   const fetchCities = async stateId => {
-    const res = await fetch(`/api/cities/${stateId}/`);
+    const res = await fetch(`${publicRuntimeConfig.CITIES}/${stateId}/`);
     const json = await res.json();
 
     setCities(json);
