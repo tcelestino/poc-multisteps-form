@@ -4,7 +4,7 @@ import getConfig from 'next/config';
 import { Dropdown } from '@catho/quantum';
 import Button from '@catho/quantum/Button';
 import withStep from '../../hoc/withStep';
-import { STEP5 } from '../../actions/steps';
+import { STEP5, LIST_STATES, LIST_CITIES } from '../../actions';
 
 const { publicRuntimeConfig } = getConfig();
 
