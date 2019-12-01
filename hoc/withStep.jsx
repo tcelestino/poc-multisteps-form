@@ -22,7 +22,7 @@ function withStep(Component) {
       return null;
     }
 
-    const handleNameChange = (e, step, callback) => {
+    const handleOnChange = (e, step, callback) => {
       const data = getChangeData(e, step);
       onChange(data);
       callback(data);
@@ -40,7 +40,7 @@ function withStep(Component) {
     return (
       <Component
         fn={{
-          handleNameChange,
+          handleOnChange,
           handleStepClick,
           handleOnClean
         }}

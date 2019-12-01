@@ -8,11 +8,11 @@ function StepName(props) {
   const [name, setName] = useState('');
 
   const {
-    fn: { handleNameChange, handleStepClick, handleOnClean }
+    fn: { handleOnChange, handleStepClick, handleOnClean }
   } = props;
 
   const onChange = e => {
-    handleNameChange(e, STEP1, ({ value }) => {
+    handleOnChange(e, STEP1, ({ value }) => {
       setName(value);
     });
   };
