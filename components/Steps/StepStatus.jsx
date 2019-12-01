@@ -22,14 +22,14 @@ const options = [
 function StepStatus(props) {
   const [checked, setChecked] = useState(false);
   const {
-    fn: { handleNameChange, handleStepClick }
+    fn: { handleOnChange, handleStepClick }
   } = props;
 
   const onChange = e => {
     let source = e;
     let changed = { name: 'statusJobs' };
 
-    handleNameChange(Object.assign(source, changed), STEP3, () => {
+    handleOnChange(Object.assign(source, changed), STEP3, () => {
       setChecked(true);
     });
   };

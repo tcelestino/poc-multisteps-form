@@ -16,7 +16,7 @@ const options = [
 
 function StepOptin(props) {
   const {
-    fn: { handleNameChange, handleStepClick }
+    fn: { handleOnChange, handleStepClick }
   } = props;
 
   const [optionsData, setOptionsData] = useState(options);
@@ -25,7 +25,7 @@ function StepOptin(props) {
     let source = arrToObj(e);
     let target = { value: source.checked ? '1' : '0' };
 
-    handleNameChange(Object.assign(source, target), STEP4, () => {
+    handleOnChange(Object.assign(source, target), STEP4, () => {
       setOptionsData(e);
     });
   };

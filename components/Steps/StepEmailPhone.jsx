@@ -9,11 +9,11 @@ function StepEmailPhone(props) {
   const [phone, setPhone] = useState('');
 
   const {
-    fn: { handleNameChange, handleStepClick, handleOnClean }
+    fn: { handleOnChange, handleStepClick, handleOnClean }
   } = props;
 
   const onChange = e => {
-    handleNameChange(e, STEP2, ({ name, value }) => {
+    handleOnChange(e, STEP2, ({ name, value }) => {
       name === 'email' ? setEmail(value) : setPhone(value);
     });
   };
