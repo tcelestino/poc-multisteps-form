@@ -7,30 +7,49 @@ import { STEP5 } from '../../actions/steps';
 
 function StepStateCity(props) {
   const {
-    fn: { handleNameChange, handleStepClick }
+    fn: { handleOnChange, handleStepClick }
   } = props;
 
   const [states, setStates] = useState([]);
-  const [state, setState] = useState('');
-
-  const loadStates = async () => {
-    const res = await fetch('/api/states');
-    const json = await res.json();
-    return json;
-  };
+  const [stateSelected, setStateSelected] = useState('');
+  const [cities, setCities] = useState([]);
+  const [citySelected, setCitySelected] = useState('');
 
   useEffect(() => {
-    loadStates().then(listStates => setStates(listStates));
-    return () => {
-      loadStates().then(listStates => setStates(listStates));
+    const fetchStates = async () => {
+      const res = await fetch('/api/states');
+      const json = await res.json();
+      setStates(json);
     };
-  }, [states]);
+
+    fetchStates();
+  }, [cities]);
+
+  const fetchCities = async stateId => {
+    const res = await fetch(`/api/cities/${stateId}/`);
+    const json = await res.json();
+
+    setCities(json);
+  };
 
   const onChange = e => {
     const source = e;
     const target = { name: 'state' };
-    handleNameChange(Object.assign(source, target), STEP5, () => {
-      setState(e);
+
+    fetchCities(source.value);
+
+    handleOnChange(Object.assign(source, target), STEP5, () => {
+      setCitySelected('');
+      setStateSelected(e);
+    });
+  };
+
+  const onChangeCities = e => {
+    const source = e;
+    const target = { name: 'city' };
+
+    handleOnChange(Object.assign(source, target), STEP5, () => {
+      setCitySelected(e);
     });
   };
 
@@ -39,17 +58,18 @@ function StepStateCity(props) {
       <Dropdown
         placeholder="Select a state"
         label="What is your state"
-        selectedItem={state}
+        selectedItem={stateSelected}
         onChange={onChange}
         items={states}
       />
 
       <Dropdown
         label="What is city"
-        selectedItem=""
-        onChange={onChange}
-        items={[]}
-        disabled={state === '' ? true : false}
+        placeholder={stateSelected === '' ? '' : 'Select a city'}
+        selectedItem={citySelected}
+        onChange={onChangeCities}
+        items={cities}
+        disabled={stateSelected === '' ? true : false}
       />
       <Button onClick={handleStepClick} skin="primary">
         Next step
