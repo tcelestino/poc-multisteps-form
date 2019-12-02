@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { Dropdown } from '@catho/quantum';
 import Button from '@catho/quantum/Button';
 import withStep from '../../hoc/withStep';
@@ -23,24 +23,27 @@ function StepStateCity(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchStates().then(data => {
-        statesDispatch({ type: LIST_STATES, payload: data });
-      });
+      const statesData = await fetchStates();
+
+      statesDispatch({ type: LIST_STATES, payload: statesData });
     };
 
     fetchData();
-  }, [cities]);
+  }, []);
+
+  const onCitiesLoaded = useCallback(async stateId => {
+    const citiesData = await fetchCities(stateId);
+    citiesDispatch({
+      type: LIST_CITIES,
+      payload: citiesData
+    });
+  });
 
   const onChange = e => {
     const source = e;
     const target = { name: 'state' };
 
-    fetchCities(source.value).then(data =>
-      citiesDispatch({
-        type: LIST_CITIES,
-        payload: data
-      })
-    );
+    onCitiesLoaded(source.value);
 
     handleOnChange(Object.assign(source, target), STEP5, () => {
       setCitySelected('');
