@@ -15,14 +15,10 @@ export default function (prevState, action) {
         [action.field]: action.name
       };
     case STEP2:
-      return inputsData(prevState, action)
     case STEP3:
-      return inputsData(prevState, action)
     case STEP4:
-      return inputsData(prevState, action)
     case STEP5:
       return inputsData(prevState, action)
-      break;
     default:
       return prevState;
       break;
