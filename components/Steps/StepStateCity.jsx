@@ -22,20 +22,20 @@ function StepStateCity(props) {
   const [citySelected, setCitySelected] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
+    const statesList = async () => {
       const statesData = await fetchStates();
 
       statesDispatch({ type: LIST_STATES, payload: statesData });
     };
 
-    fetchData();
+    statesList();
   }, []);
 
-  const onCitiesLoaded = useCallback(async stateId => {
-    const citiesData = await fetchCities(stateId);
+  const setCities = useCallback(async stateId => {
+    const cities = await fetchCities(stateId);
     citiesDispatch({
       type: LIST_CITIES,
-      payload: citiesData
+      payload: cities
     });
   });
 
@@ -43,7 +43,7 @@ function StepStateCity(props) {
     const source = e;
     const target = { name: 'state' };
 
-    onCitiesLoaded(source.value);
+    setCities(source.value);
 
     handleOnChange(Object.assign(source, target), STEP5, () => {
       setCitySelected('');
