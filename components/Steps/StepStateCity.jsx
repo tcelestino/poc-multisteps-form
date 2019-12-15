@@ -1,45 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import fetch from 'isomorphic-unfetch';
-import getConfig from 'next/config';
+import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { Dropdown } from '@catho/quantum';
 import Button from '@catho/quantum/Button';
 import withStep from '../../hoc/withStep';
-import { STEP5 } from '../../actions/steps';
-
-const { publicRuntimeConfig } = getConfig();
+import {
+  STEP5,
+  LIST_STATES,
+  LIST_CITIES,
+  fetchStates,
+  fetchCities
+} from '../../actions';
+import { States, Cities } from '../../reducers';
 
 function StepStateCity(props) {
   const {
     fn: { handleOnChange, handleStepClick }
   } = props;
 
-  const [states, setStates] = useState([]);
+  const [states, statesDispatch] = useReducer(States, []);
   const [stateSelected, setStateSelected] = useState('');
-  const [cities, setCities] = useState([]);
+  const [cities, citiesDispatch] = useReducer(Cities, []);
   const [citySelected, setCitySelected] = useState('');
 
   useEffect(() => {
-    const fetchStates = async () => {
-      const res = await fetch(`${publicRuntimeConfig.STATES}`);
-      const json = await res.json();
-      setStates(json);
+    const statesList = async () => {
+      const statesData = await fetchStates();
+
+      statesDispatch({ type: LIST_STATES, payload: statesData });
     };
 
-    fetchStates();
-  }, [cities]);
+    statesList();
+  }, []);
 
-  const fetchCities = async stateId => {
-    const res = await fetch(`${publicRuntimeConfig.CITIES}/${stateId}/`);
-    const json = await res.json();
-
-    setCities(json);
-  };
+  const setCities = useCallback(async stateId => {
+    const cities = await fetchCities(stateId);
+    citiesDispatch({
+      type: LIST_CITIES,
+      payload: cities
+    });
+  });
 
   const onChange = e => {
     const source = e;
     const target = { name: 'state' };
 
-    fetchCities(source.value);
+    setCities(source.value);
 
     handleOnChange(Object.assign(source, target), STEP5, () => {
       setCitySelected('');
@@ -63,7 +67,7 @@ function StepStateCity(props) {
         label="What is your state"
         selectedItem={stateSelected}
         onChange={onChange}
-        items={states}
+        items={states.payload}
       />
 
       <Dropdown
@@ -71,7 +75,7 @@ function StepStateCity(props) {
         placeholder={stateSelected === '' ? '' : 'Select a city'}
         selectedItem={citySelected}
         onChange={onChangeCities}
-        items={cities}
+        items={cities.payload}
         disabled={stateSelected === '' ? true : false}
       />
       <Button onClick={handleStepClick} skin="primary">
