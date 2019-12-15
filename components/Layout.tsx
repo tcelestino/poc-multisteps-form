@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Head from 'next/head';
+// @ts-ignore
 import GlobalStyle from '@catho/quantum/GlobalStyle';
+// @ts-ignore
 import { Container, Row, Col } from '@catho/quantum/Grid';
 
-function Layout(props) {
+interface Props {
+  title: string;
+  children: ReactNode;
+}
+
+function Layout(props: Props): JSX.Element {
   const { title, children } = props;
   return (
     <>
       <GlobalStyle />
       <Head>
         <title>{title}</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <header>
         <Container fluid>
